@@ -34,7 +34,7 @@
 }
 
 - (IBAction)deal {
-	int matchCount = 2;
+	int matchCount = 3;
 	[self.game shuffle:[[PlayingCardDeck alloc] init] withCardCount:self.cardButtons.count withMatchCount:matchCount];
 	self.flipCount = 0;
 	[self updateUI];

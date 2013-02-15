@@ -9,7 +9,7 @@
 #import "SetCard.h"
 
 @implementation SetCard
-
+/*
 - (NSString *) contents {
 	NSArray *ranks = [self.class rankStrings];
 	NSString *result = [ranks[self.rank] stringByAppendingString:self.suit];
@@ -45,5 +45,5 @@
 	}
 	return score;
 }
-
+*/
 @end

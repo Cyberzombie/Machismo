@@ -36,4 +36,8 @@
  withMatchCount:(NSUInteger) matchCount {
 	// override me
 }
+
+- (int)score {
+	return 0;
+}
 @end

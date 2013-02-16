@@ -19,7 +19,8 @@
 
 - (void)shuffle:(Deck *) deck withCardCount:(NSUInteger) cardCount withMatchCount:(NSUInteger) matchCount;
 
-@property (nonatomic) int score;
+- (int)score;
+//@property (nonatomic) int score;
 @property (nonatomic) NSString *playResult;
 
 @end

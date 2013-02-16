@@ -11,6 +11,7 @@
 @interface CardMatchingGame()
 @property (nonatomic) NSMutableArray *cards;
 @property (nonatomic) int matchCount;
+@property (nonatomic) int matchScore;
 @end
 
 @implementation CardMatchingGame
@@ -26,7 +27,7 @@
  withMatchCount:(NSUInteger) matchCount {
 	self.cards = nil;
 	self.playResult = nil;
-	self.score = 0;
+	self.matchScore = 0;
 	self.matchCount = matchCount;
 	for (int index = 0; index < cardCount; index++) {
 		Card *card = [deck drawRandomCard];
@@ -56,7 +57,7 @@
 		self.playResult = @"";
 
 		if (card.isPlayable) {
-			self.score -= FLIP_COST;
+			self.matchScore -= FLIP_COST;
 			if (!card.isFaceUp) {
 				NSMutableArray *otherCards = [[NSMutableArray alloc] init];
 				for (Card *otherCard in self.cards) {
@@ -75,14 +76,14 @@
 					}
 					text = [text substringToIndex:text.length - 2];
 					if (matchScore == 0) {
-						self.score -= MISMATCH_PENALTY;
+						self.matchScore -= MISMATCH_PENALTY;
 						self.playResult = [NSString stringWithFormat:@"%@ and %@ don't match! %d point penalty!",
 										   text, card.contents, MISMATCH_PENALTY];
 						for (Card *otherCard in otherCards) {
 							otherCard.faceUp = NO;
 						}
 					} else {
-						self.score += matchScore * MATCH_BONUS;
+						self.matchScore += matchScore * MATCH_BONUS;
 						self.playResult = [NSString stringWithFormat:@"Matched %@ and %@ for %d points",
 										   text, card.contents, matchScore * MATCH_BONUS];
 						card.playable = NO;
@@ -104,4 +105,7 @@
 	return nil;
 }
 
+- (int)score {
+	return self.matchScore;
+}
 @end

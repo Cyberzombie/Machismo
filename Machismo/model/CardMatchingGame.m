@@ -10,8 +10,6 @@
 
 @interface CardMatchingGame()
 @property (nonatomic) NSMutableArray *cards;
-@property (nonatomic,readwrite) int score;
-@property (nonatomic,readwrite) NSString *playResult;
 @property (nonatomic) int matchCount;
 @end
 
@@ -37,13 +35,6 @@
 			self.cards[index] = card;
 		}
 	}	
-}
-
-- (NSString *)playResult {
-	if (!_playResult) {
-		_playResult = @"";
-	}
-	return _playResult;
 }
 
 - (id)initWithCardCount:(NSUInteger) cardCount

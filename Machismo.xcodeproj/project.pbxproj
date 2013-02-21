@@ -142,14 +142,14 @@
 		21BD930516CDFD4100F04E12 /* Machismo */ = {
 			isa = PBXGroup;
 			children = (
+				21BD931716CDFD4100F04E12 /* MainStoryboard.storyboard */,
 				21BD934A16CDFF6500F04E12 /* CardGameViewController.h */,
 				21BD934B16CDFF6500F04E12 /* CardGameViewController.m */,
 				21BD934C16CDFF6500F04E12 /* MatchViewController.h */,
 				21BD934D16CDFF6500F04E12 /* MatchViewController.m */,
-				21BD933716CDFEC600F04E12 /* model */,
-				21BD931716CDFD4100F04E12 /* MainStoryboard.storyboard */,
 				2156567316CF2B6A000F033A /* SetViewController.h */,
 				2156567416CF2B6A000F033A /* SetViewController.m */,
+				21BD933716CDFEC600F04E12 /* model */,
 				21BD930616CDFD4100F04E12 /* Supporting Files */,
 			);
 			path = Machismo;

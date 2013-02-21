@@ -7,37 +7,47 @@
 //
 
 #import "CardGameViewController.h"
-#import "PlayingCardDeck.h"
-#import "CardMatchingGame.h"
+#import "Deck.h"
+#import "CardGame.h"
 
 @interface CardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (nonatomic) int flipCount;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
-@property (nonatomic) CardMatchingGame *game;
+@property (nonatomic) CardGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *playResult;
 @end
 
 @implementation CardGameViewController
+@synthesize cardButtons = _cardButtons;
+
 - (void) viewDidLoad {
 	[super viewDidLoad];
 	self.playResult.text = @"";
 }
 
-- (CardMatchingGame *) game {
+- (CardGame *) game {
 	if (!_game) {
-		_game = [[CardMatchingGame alloc] initWithCardCount:self.cardButtons.count
-												  usingDeck:[[PlayingCardDeck alloc] init]];
+		_game = [self createGame: self.cardButtons.count];
 	}
 	return _game;
 }
 
+- (CardGame *) createGame: (NSUInteger) cardCount {
+	return [[CardGame alloc] initWithCardCount:self.cardButtons.count
+									 usingDeck:[[Deck alloc] init]];
+}
+
 - (IBAction)deal {
 	int matchCount = 3;
-	[self.game shuffle:[[PlayingCardDeck alloc] init] withCardCount:self.cardButtons.count withMatchCount:matchCount];
+	[self.game shuffle:[[Deck alloc] init] withCardCount:self.cardButtons.count withMatchCount:matchCount];
 	self.flipCount = 0;
 	[self updateUI];
+}
+
+-(NSArray *)cardButtons {
+	return _cardButtons;
 }
 
 - (void)setCardButtons:(NSArray *)cardButtons {

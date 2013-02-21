@@ -9,41 +9,71 @@
 #import "SetCard.h"
 
 @implementation SetCard
-/*
+@synthesize symbol = _symbol;
+
 - (NSString *) contents {
-	NSArray *ranks = [self.class rankStrings];
-	NSString *result = [ranks[self.rank] stringByAppendingString:self.suit];
-	return result;
+	NSString *contents = @"";
+	for (int count = 0; count < self.count; count++) {
+		contents = [contents stringByAppendingString:self.symbol];
+	}
+	return contents;
 }
 
-+ (NSArray *) symbolStrings {
-	return @[@"?",@""];
+- (void)count:(int) count {
+	if (count > 0 && count < 4) {
+		_count = count;
+	}
 }
 
-+ (NSInteger) maxRank {
-	return [self.class rankStrings].count - 1;
+- (NSString *)symbol {
+	if (!_symbol) {
+		_symbol = @"?";
+	}
+	return _symbol;
 }
 
-#define SUIT_MATCH 1
-#define RANK_MATCH 4
+- (void)symbol:(NSString *) symbol {
+	if ([[self.class validSymbols] containsObject:symbol]) {
+		_symbol = symbol;
+	}
+}
 
--(int) match:(NSArray *)otherCards {
-	int score = 0;
-	bool isRankMatch = YES;
-	bool isSuitMatch = YES;
-	for (PlayingCard *otherCard in otherCards) {
-		if (isRankMatch && self.rank == otherCard.rank) {
-			isSuitMatch = NO;
-			score += RANK_MATCH;
-		} else if (isSuitMatch && self.suit == otherCard.suit) {
-			isRankMatch = NO;
-			score += SUIT_MATCH;
-		} else {
-			score = 0;
-			break;
++ (NSArray *) validSymbols {
+	return @[@"▲",@"●",@"◼"];
+}
+
+#define MATCH 5
+
+- (int)match:(NSArray *) otherCards {
+	if (otherCards.count != 2) {
+		return 0;
+	}
+	BOOL openMatches = TRUE;
+	BOOL countMatches = TRUE;
+	BOOL colorMatches = TRUE;
+
+	for (SetCard *otherCard in otherCards) {
+		if (otherCard.isOpen != self.isOpen) {
+			openMatches = FALSE;
 		}
+		if (otherCard.count != self.count) {
+			countMatches = FALSE;
+		}
+		if (otherCard.color != self.color) {
+			colorMatches = FALSE;
+		}
+	}
+
+	int score = 0;
+	if (openMatches) {
+		score += MATCH;
+	}
+	if (countMatches) {
+		score += MATCH;
+	}
+	if (colorMatches) {
+		score += MATCH;
 	}
 	return score;
 }
-*/
 @end

@@ -8,14 +8,23 @@
 
 #import "Card.h"
 
-enum SetColor {
+typedef enum {
 	Red = 0,
-	Green = 1,
-	Blue = 3
-	};
+	Green,
+	Blue
+} SetColor;
+
+typedef enum {
+	Circle = 0,
+	Square,
+	Triangle
+} SymbolType;
 
 @interface SetCard : Card
 @property (nonatomic) int count;
-@property (nonatomic) enum SetColor color;
+@property (nonatomic) NSString *symbol;
+@property (nonatomic) SetColor color;
 @property (nonatomic, getter = isOpen) BOOL open;
+
++ (NSArray *)validSymbols;
 @end
